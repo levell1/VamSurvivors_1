@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Manager : MonoBehaviour
+public class Managers : MonoBehaviour
 {
-    
-    // Start is called before the first frame update
+    // Temp2 Joystick-Player (Manager(Static))
+    public static Vector2 MoveDir;
+
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         
