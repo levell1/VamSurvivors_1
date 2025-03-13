@@ -14,9 +14,18 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
-        
+        Managers.Game.OnMoveDirChanged += HandleOnMoveDirChanged;
     }
 
+    void OnDestroy()
+    {
+        if (Managers.Game != null)
+            Managers.Game.OnMoveDirChanged -= HandleOnMoveDirChanged;
+    }
+    void HandleOnMoveDirChanged(Vector2 dir) 
+    {
+        _moverDir = dir;
+    }
 
     void Update()
     {
@@ -24,27 +33,10 @@ public class PlayerController : MonoBehaviour
         MovePlayer();
     }
 
-    // Device Simulator X
-    void UpdateInput() 
-    {
-        Vector2 moveDir = Vector2.zero;
-
-        if (Input.GetKey(KeyCode.W))
-            moveDir.y += 1;
-        if (Input.GetKey(KeyCode.A))
-            moveDir.x -= 1;
-        if (Input.GetKey(KeyCode.S))
-            moveDir.y -= 1;
-        if (Input.GetKey(KeyCode.D))
-            moveDir.x += 1;
-
-        _moverDir = moveDir.normalized; // normalized 방향정보
-
-    }
 
     void MovePlayer() {
         // Temp2 Joystick-Player (Manager(Static))
-        _moverDir = Managers.MoveDir;
+        //_moverDir = Managers.Game.MoveDir;
 
         Vector3 dir = _moverDir * _speed * Time.deltaTime;
         transform.position += dir;

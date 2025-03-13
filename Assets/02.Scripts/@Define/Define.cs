@@ -1,4 +1,17 @@
 
+public enum Scene
+{
+    Unknown,
+    DevScene,
+    GameScene
+}
+
+public enum Sound 
+{
+    Bgm,
+    Effect
+}
+
 public struct UIName
 {
     public const string ControlKeyUI = "ControlKeyUI";

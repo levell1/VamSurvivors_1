@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SceneManager : MonoBehaviour
+public class GameScene : MonoBehaviour
 {
     public GameObject _slimePrefab;
     public GameObject _goblinPrefab;

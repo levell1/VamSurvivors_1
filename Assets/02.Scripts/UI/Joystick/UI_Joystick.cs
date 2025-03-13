@@ -14,13 +14,10 @@ public class UI_Joystick : MonoBehaviour, IPointerClickHandler, IPointerDownHand
     Vector2 _touchPosition;
     Vector2 _moveDir;
 
-    PlayerController _player;
 
     void Start()
     {
         _joystickRadius = _bg.gameObject.GetComponent<RectTransform>().sizeDelta.y / 2;
-        // Temp1 Joystick-Player (Find)
-        _player = GameObject.Find("Slime_01").GetComponent<PlayerController>();
     }
 
     
@@ -47,11 +44,8 @@ public class UI_Joystick : MonoBehaviour, IPointerClickHandler, IPointerDownHand
         _handler.transform.position = _touchPosition;
         _moveDir = Vector2.zero;
 
-        // Temp1 Joystick-Player (Find)
-        //_player.MoveDir = _moveDir;
-
         // Temp2 Joystick-Player (Manager(Static))
-        Managers.MoveDir = _moveDir;
+        Managers.Game.MoveDir = _moveDir;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -62,11 +56,8 @@ public class UI_Joystick : MonoBehaviour, IPointerClickHandler, IPointerDownHand
         Vector2 newPosition = _touchPosition + _moveDir * moveDist;
         _handler.transform.position = newPosition;
 
-        // Temp1 Joystick-Player (Find)
-        //_player.MoveDir = _moveDir;
-
         // Temp2 Joystick-Player (Manager(Static))
-        Managers.MoveDir = _moveDir;
+        Managers.Game.MoveDir = _moveDir;
     }
 
 }
