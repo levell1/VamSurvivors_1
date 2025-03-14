@@ -3,13 +3,13 @@ public enum Scene
 {
     Unknown,
     DevScene,
-    GameScene
+    GameScene,
 }
 
 public enum Sound 
 {
     Bgm,
-    Effect
+    Effect,
 }
 
 public struct UIName
