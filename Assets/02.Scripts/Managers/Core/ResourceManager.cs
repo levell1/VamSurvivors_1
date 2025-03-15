@@ -28,6 +28,12 @@ public class ResourceManager
             return null;
         }
 
+        //Pooling
+        if (pooling==true)
+        {
+            
+        }
+
         GameObject go = Object.Instantiate(prefabs, parent);
         go.name = prefabs.name;
         return go;
@@ -42,11 +48,8 @@ public class ResourceManager
     }
 
     #region 어드레서블
-    
     public void LoadAsync<T>(string key,Action<T> callback = null) where T : UnityEngine.Object 
     {
-        // 로딩이 끝났으면 Action 해줘    
-
         // 캐시 확인.
         if (_resources.TryGetValue(key, out Object resource)) 
         {
@@ -83,4 +86,5 @@ public class ResourceManager
         };
     }
     #endregion
+
 }

@@ -10,16 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Default Local Group
+  m_Name: UI_Prefabs
   m_EditorClassIdentifier: 
-  m_GroupName: Default Local Group
+  m_GroupName: UI_Prefabs
   m_Data:
     m_SerializedData: []
-  m_GUID: 7cb26f0882f9be14586648c6b11a56a2
-  m_SerializeEntries: []
+  m_GUID: 9a971a8bad3d27542894440abdc1116d
+  m_SerializeEntries:
+  - m_GUID: 852b0f0fbb0760b409e6ea2600eb1ca2
+    m_Address: UI_Joystick.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Prefabs
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 07175c5de700c5343897fe3485c90eec, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: b5c6b4c055fa624419c4a0902c24eaef, type: 2}
-    - {fileID: 11400000, guid: 99b7903be4b5da14595273a0b59a03aa, type: 2}
+    - {fileID: 11400000, guid: ae8a054575aaef24084998c33a583631, type: 2}
+    - {fileID: 11400000, guid: c2818fae8af9a454996f5745f3900263, type: 2}

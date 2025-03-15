@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager 
 {
+    public PlayerController Player { get { return Managers.Object?.Player; } }
     Vector2 _moveDir;
 
     public event Action<Vector2> OnMoveDirChanged;
