@@ -32,7 +32,7 @@ public class MonsterController : CreatureController
             return;
 
         Vector3 dir = pc.transform.position - transform.position;
-        Vector3 newPos = transform.position + dir.normalized * Time.deltaTime * _speed;
+        Vector3 newPos = transform.position + dir.normalized * Time.fixedDeltaTime * _speed; //fixedDeltaTime
         //transform.position = newPos;                            //포지션으로 이동
         GetComponent<Rigidbody2D>().MovePosition(newPos);     //물리적인 정보를 체크하면서 이동
         GetComponent<SpriteRenderer>().flipX = dir.x > 0;

@@ -21,8 +21,8 @@ public class ResourceManager
 
     public GameObject Instantiate(string key, Transform parent = null, bool pooling = false) 
     {
-        GameObject prefabs = Load<GameObject>($"{key}");
-        if (prefabs==null)
+        GameObject prefab = Load<GameObject>($"{key}");
+        if (prefab==null)
         {
             Debug.Log($"Failed to load Prefabs : {key}");
             return null;
@@ -30,18 +30,20 @@ public class ResourceManager
 
         //Pooling
         if (pooling==true)
-        {
-            
-        }
+            return Managers.Pool.Pop(prefab);
+        
 
-        GameObject go = Object.Instantiate(prefabs, parent);
-        go.name = prefabs.name;
+        GameObject go = Object.Instantiate(prefab, parent);
+        go.name = prefab.name;
         return go;
     }
 
     public void Destroy(GameObject go) 
     {
         if (go == null)
+            return;
+
+        if (Managers.Pool.Push(go))
             return;
 
         Object.Destroy(go);

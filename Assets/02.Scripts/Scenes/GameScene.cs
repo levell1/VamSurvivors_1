@@ -30,7 +30,7 @@ public class GameScene : MonoBehaviour
             StartLoaded();
         }
     }*/
-    
+
 
     /*void StartLoaded() 
     {
@@ -49,8 +49,11 @@ public class GameScene : MonoBehaviour
         Camera.main.GetComponent<CameraController>().Target = player;
     }*/
 
+    SpawningPool _spawningPool;
     void StartLoaded()
     {
+        _spawningPool = gameObject.AddComponent<SpawningPool>();
+
         var player = Managers.Object.Spawn<PlayerController>();
 
         for (int i = 0; i < 10; i++)

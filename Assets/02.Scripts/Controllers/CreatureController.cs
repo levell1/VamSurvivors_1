@@ -7,7 +7,7 @@ public class CreatureController : BaseController
 {
     public ObjectType ObjType { get; protected set; }
     
-    protected float _speed = 1.0f;
+    protected float _speed = 2.0f;
     public int Hp { get; set; } = 100;
     public int MaxHP { get; set; } = 100;
 
