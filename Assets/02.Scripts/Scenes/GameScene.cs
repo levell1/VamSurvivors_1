@@ -1,6 +1,7 @@
 using Mono.Cecil;
 using UnityEditor.AddressableAssets.HostingServices;
 using UnityEngine;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class GameScene : MonoBehaviour
 {
@@ -10,11 +11,18 @@ public class GameScene : MonoBehaviour
         //Managers.Resource.LoadAllAsync<GameObject>("Prefabs", OnLoadProgress);
         Managers.Resource.LoadAllAsync<GameObject>("Prefabs", (key,count,totalCount) =>
         {
+            //Debug.Log($"{key} {count}/{totalCount}");
             Debug.Log($"{key} {count}/{totalCount}");
-
             if (count==totalCount)
             {
-                StartLoaded();
+                Managers.Resource.LoadAllAsync<TextAsset>("Data", (key3, count3, totalCount3) =>
+                {
+                    Debug.Log($"{key3} {count3}/{totalCount3}");
+                    if (count3 == totalCount3)
+                    {
+                        StartLoaded();
+                    }
+                });
             }
         });
     }
@@ -69,6 +77,14 @@ public class GameScene : MonoBehaviour
         map.name = "@Map";
 
         Camera.main.GetComponent<CameraController>().Target = player.gameObject;
+
+        //Data Test
+        Managers.Data.Init();
+
+        foreach (var playerData in Managers.Data.PlayerDic.Values)
+        {
+            Debug.Log($"Lv1 : {playerData.level}, HP : {playerData.maxHp}");
+        }
     }
 
     void Update()
