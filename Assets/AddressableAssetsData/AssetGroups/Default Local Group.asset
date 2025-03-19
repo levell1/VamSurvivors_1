@@ -16,11 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 7cb26f0882f9be14586648c6b11a56a2
-  m_SerializeEntries:
-  - m_GUID: dba7d3cbdb907e640a4113e661e55b26
-    m_Address: Assets/03.Resources/Prefabs/Env/EXPGem_01.prefab
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+  m_SerializeEntries: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 07175c5de700c5343897fe3485c90eec, type: 2}
   m_SchemaSet:

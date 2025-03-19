@@ -61,7 +61,6 @@ public class GameScene : MonoBehaviour
         {
             Vector3 randPos = new Vector2(Random.Range(-5, 5), Random.Range(-5, 5));
             MonsterController mc = Managers.Object.Spawn<MonsterController>(randPos,Random.Range(0,2));
-            
         }
 
         var joystick = Managers.Resource.Instantiate(PrefabsName.UI_Joystick);
