@@ -46,6 +46,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4a2c6f3bed4873e44afdbdccf552c478, type: 2}
   - {fileID: 11400000, guid: c68c288e0a30a6c4a9ef8c829fdddb57, type: 2}
   - {fileID: 11400000, guid: 46da8e5df18548e408f256edcfb65bc6, type: 2}
+  - {fileID: 11400000, guid: 41acb8c8b70c42942857664795e61254, type: 2}
+  - {fileID: 11400000, guid: 52a210f49df46b44fa5e4666c2dd5964, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -88,6 +90,8 @@ MonoBehaviour:
     m_LabelNames:
     - default
     - Prefabs
+    - Data
+    - PreLoad
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 78396158e989a3b41b7e3e14e2dc00da, type: 2}

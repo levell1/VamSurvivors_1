@@ -59,8 +59,14 @@ public class ResourceManager
             return;
         }
 
+        string loadKey = key;
+        if (key.Contains(".sprite"))
+            loadKey = $"{key}[{key.Replace(".sprite", "")}]";
+            
+        
+
         // 리소스 비동기 로딩 
-        var asyncOperation = Addressables.LoadAssetAsync<T>(key);
+        var asyncOperation = Addressables.LoadAssetAsync<T>(loadKey);
         asyncOperation.Completed += (op) =>
         {
             _resources.Add(key, op.Result);

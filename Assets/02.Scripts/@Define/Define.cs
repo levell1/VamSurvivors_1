@@ -28,6 +28,7 @@ public struct PrefabsName
     public const string Player = "Slime_01.prefab";
     public const string UI_Joystick = "UI_Joystick.prefab";
     public const string Map = "Map.prefab";
+    public const string Gem = "EXPGem.prefab";
 }
 
 public struct SceneName
