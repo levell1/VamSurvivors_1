@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Data
 {
-    //#region PlayerData
+    //#region PlayerData json
     //[Serializable]
     //public class PlayerData
     //{
@@ -61,7 +61,8 @@ namespace Data
     }
     #endregion
 
-    public class MonsterData 
+    #region MonsterData 
+    public class MonsterData
     {
         [XmlAttribute]
         public string name;
@@ -80,4 +81,55 @@ namespace Data
         // - 어떤 아이템을 (보석, 스킬 가차, 골드, 고기)
         // - 몇 개 드랍할지?
     }
+    #endregion
+
+    #region SkillData 
+
+    [Serializable]
+    public class HitEffect 
+    {
+        [XmlAttribute]
+        public string type;
+        [XmlAttribute]
+        public int templateID;
+        [XmlAttribute]
+        public int value;
+    }
+    public class SkillData
+    {
+        [XmlAttribute]
+        public int templateID;
+        [XmlAttribute(AttributeName = "type")]
+        //public string skillTypeStr;
+        public SkillType skillType = SkillType.None;
+        [XmlAttribute]
+        public int nextID;
+        public int prevID =0;//Todo
+
+        [XmlAttribute]
+        public string prefab;
+
+        //아주많이
+        [XmlAttribute]
+        public int damage;
+
+        //[XmlAttribute("HitEffect")]
+        //public List<HitEffect> hitEffects = new List<HitEffect>();
+    }
+
+    [Serializable, XmlRoot("SkillDatas")]
+    public class SkillDataLoader : ILoader<int, SkillData>
+    {
+        [XmlElement("PlayerData")]
+        public List<SkillData> skills = new List<SkillData>();
+
+        public Dictionary<int, SkillData> MakeDict()
+        {
+            Dictionary<int, SkillData> dict = new Dictionary<int, SkillData>();
+            foreach (SkillData skill in skills)
+                dict.Add(skill.templateID, skill);
+            return dict;
+        }
+    }
+    #endregion
 }

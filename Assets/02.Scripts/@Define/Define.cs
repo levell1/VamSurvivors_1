@@ -20,6 +20,14 @@ public enum ObjectType
     Env,
 }
 
+public enum SkillType
+{
+    None,
+    Melee,
+    Projectile,
+    Etc,
+}
+
 
 public struct PrefabsName
 {
