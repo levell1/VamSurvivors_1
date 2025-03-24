@@ -41,7 +41,9 @@ public class MonsterController : CreatureController
     private void OnCollisionEnter2D(Collision2D collision)
     {
         PlayerController target = collision.gameObject.GetComponent<PlayerController>();
-        if (target == null)
+        if (target.IsValid() == false)
+            return;
+        if (this.IsValid() == false)
             return;
 
         if (_coDotDamage != null) // 기존에 뭔가 있는걸 대비
@@ -53,7 +55,9 @@ public class MonsterController : CreatureController
     public void OnCollisionExit2D(Collision2D collision)
     {
         PlayerController target = collision.gameObject.GetComponent<PlayerController>();
-        if (target == null)
+        if (target.IsValid() == false)
+            return;
+        if (this.IsValid() == false)
             return;
 
         if (_coDotDamage != null)

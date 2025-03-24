@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileController : BaseController
+public class PoisonFieldController : MonoBehaviour
 {
 
     void Start()

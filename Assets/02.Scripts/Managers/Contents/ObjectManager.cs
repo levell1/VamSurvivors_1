@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.AddressableAssets.HostingServices;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ObjectManager 
 {
     
     public PlayerController Player { get; private set; }
     public HashSet<MonsterController> Monster { get; } = new HashSet<MonsterController>();
-    public HashSet<ProjectileController> Projectile { get; } = new HashSet<ProjectileController>();
+    public HashSet<ProjectileController> Projectiles { get; } = new HashSet<ProjectileController>();
     public HashSet<GemController> Gems { get; } = new HashSet<GemController>();
 
     public T Spawn<T>(Vector3 position, int  templateID =0) where T : BaseController 
@@ -57,11 +58,27 @@ public class ObjectManager
 
             return gc as T;
         }
+        else if (type == typeof(ProjectileController))
+        {
+            GameObject go = Managers.Resource.Instantiate(SkillPrefabsName.FireProjectile, pooling: true);
+            go.transform.position = position;
+
+            ProjectileController pc = go.GetOrAddComponent<ProjectileController>();
+            Projectiles.Add(pc);
+            pc.Init();
+
+            return pc as T;
+        }
         return null;
     }
 
     public void Despawn<T>(T obj) where T : BaseController 
     {
+        if (obj.IsValid()==false)
+        {
+            // µð¹ö±ëÄÚµå
+            Debug.Log($"Object Pool Error Debuging");
+        }
         System.Type type = typeof(T);
 
         if (type == typeof(PlayerController))
@@ -73,11 +90,6 @@ public class ObjectManager
             Monster.Remove(obj as MonsterController);
             Managers.Resource.Destroy(obj.gameObject);
         }
-        else if (type == typeof(ProjectileController))
-        {
-            Projectile.Remove(obj as ProjectileController);
-            Managers.Resource.Destroy(obj.gameObject);
-        }
         else if (type == typeof(GemController))
         {
             Gems.Remove(obj as GemController);
@@ -85,6 +97,11 @@ public class ObjectManager
 
             //Temp
             GameObject.Find("@Grid").GetComponent<GridController>().Remove(obj.gameObject);
+        }
+        else if (type == typeof(ProjectileController))
+        {
+            Projectiles.Remove(obj as ProjectileController);
+            Managers.Resource.Destroy(obj.gameObject);
         }
 
     }

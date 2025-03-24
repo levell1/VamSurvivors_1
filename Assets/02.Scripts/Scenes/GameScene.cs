@@ -53,7 +53,13 @@ public class GameScene : MonoBehaviour
     SpawningPool _spawningPool;
     void StartLoaded()
     {
+        Managers.Data.Init();
         _spawningPool = gameObject.AddComponent<SpawningPool>();
+
+        foreach (var skilldata in Managers.Data.SkillDic.Values)
+        {
+            Debug.Log($" ½ºÅ³ id : {skilldata.templateID}");
+        }
 
         var player = Managers.Object.Spawn<PlayerController>(Vector3.zero);
 
@@ -71,13 +77,7 @@ public class GameScene : MonoBehaviour
 
         Camera.main.GetComponent<CameraController>().Target = player.gameObject;
 
-        //Data Test
-        Managers.Data.Init();
-
-        foreach (var playerData in Managers.Data.PlayerDic.Values)
-        {
-            Debug.Log($"Lv1 : {playerData.level}, HP : {playerData.maxHp}");
-        }
+        
     }
 
     void Update()

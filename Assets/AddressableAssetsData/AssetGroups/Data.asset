@@ -23,6 +23,11 @@ MonoBehaviour:
     m_SerializedLabels:
     - Datas
     - PreLoad
+  - m_GUID: 85987eb04d85509459264ad1e09e0c89
+    m_Address: SkillData.xml
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - PreLoad
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 07175c5de700c5343897fe3485c90eec, type: 2}
   m_SchemaSet:

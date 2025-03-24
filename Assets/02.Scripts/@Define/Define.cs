@@ -39,6 +39,11 @@ public struct PrefabsName
     public const string Gem = "EXPGem.prefab";
 }
 
+public struct SkillPrefabsName
+{
+    public const string FireProjectile = "FireProjectile.prefab";
+}
+
 public struct SceneName
 {
     public const string TitleScene = "TitleScene";
