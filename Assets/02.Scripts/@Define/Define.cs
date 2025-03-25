@@ -27,6 +27,11 @@ public enum SkillType
     Projectile,
     Etc,
 }
+public struct SkillID
+{
+    public const int EGO_SWORD_ID = 10;
+
+}
 
 
 public struct PrefabsName
@@ -42,6 +47,7 @@ public struct PrefabsName
 public struct SkillPrefabsName
 {
     public const string FireProjectile = "FireProjectile.prefab";
+    public const string EgoSword = "EgoSword.prefab";
 }
 
 public struct SceneName

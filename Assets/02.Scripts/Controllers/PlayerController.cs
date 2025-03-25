@@ -21,11 +21,6 @@ public class PlayerController : CreatureController
         set { _moverDir = value.normalized; }
     }
 
-    void Start()
-    {
-        
-    }
-
     public override bool Init()
     {
         if (base.Init() == false)
@@ -35,6 +30,7 @@ public class PlayerController : CreatureController
         Managers.Game.OnMoveDirChanged += HandleOnMoveDirChanged;
 
         StartProjectile();
+        StartEgoSword();
 
         return true;
     }
@@ -74,9 +70,13 @@ public class PlayerController : CreatureController
     void CollectEnv() 
     {
         float sqrCollectDis = EnvCollectDist * EnvCollectDist;
-        List<GemController> gems = Managers.Object.Gems.ToList();
-        foreach (GemController gem in gems)
+
+        var findGems = GameObject.Find("@Grid").GetComponent<GridController>().GatherObjects(transform.position, EnvCollectDist + 0.4f);
+
+        foreach (var go in findGems)
         {
+            GemController gem = go.GetComponent<GemController>();
+
             Vector3 dir = gem.transform.position - transform.position;
             if (dir.sqrMagnitude <= EnvCollectDist)
             {
@@ -85,9 +85,8 @@ public class PlayerController : CreatureController
             }   
         }
 
-        var findGems = GameObject.Find("@Grid").GetComponent<GridController>().GatherObjects(transform.position, EnvCollectDist + 0.4f);
-
-        //Debug.Log($"GridSearch = {findGems.Count} Total = {gems.Count}");
+        
+        //Debug.Log($"GridSearch = {findGems.Count} ");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -129,6 +128,22 @@ public class PlayerController : CreatureController
             yield return wait;
         }
         
+    }
+
+    #endregion
+
+    #region EgoSword
+
+    EgoSwordController _egoSword;
+    void StartEgoSword() 
+    {
+        if (_egoSword.IsValid())
+            return;
+
+        _egoSword = Managers.Object.Spawn<EgoSwordController>(_indicator.position, SkillID.EGO_SWORD_ID);
+        _egoSword.transform.SetParent(_indicator);
+
+        _egoSword.ActivateSkill();
     }
 
     #endregion

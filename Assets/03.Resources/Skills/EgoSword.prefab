@@ -9802,6 +9802,7 @@ GameObject:
   - component: {fileID: 1019244395028816544}
   - component: {fileID: 7593453727462018241}
   - component: {fileID: 9073966926747796760}
+  - component: {fileID: 4916653785112287898}
   m_Layer: 8
   m_Name: EgoSword_Melee_04
   m_TagString: Untagged
@@ -14701,6 +14702,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 4
+--- !u!114 &4916653785112287898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2158826152715693120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46a368781b7854b45a928e90014a67cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4116982615402460806
 GameObject:
   m_ObjectHideFlags: 0
@@ -24610,7 +24623,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4217842100069291762}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 505b9463f50ec0d4397db028718fb21e, type: 3}
+  m_Script: {fileID: 11500000, guid: cd6f242bc48214a468a7b269f7e8c4b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _swingParticles:
