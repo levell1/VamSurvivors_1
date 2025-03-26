@@ -2,14 +2,26 @@ using System;
 using UnityEngine;
 
 
-public class GameManager 
+public class GameManager
 {
     public PlayerController Player { get { return Managers.Object?.Player; } }
-    
+
 
     #region 재화
     public int Gold { get; set; }
-    public int Gem { get; set; }
+    int _gem = 0;
+
+
+    public event Action<int> OnGemCountChanged;
+    public int Gem
+    {
+        get { return _gem; }
+        set
+        {
+            _gem = value;
+            OnGemCountChanged?.Invoke(value);
+        }
+    }
     #endregion
 
     #region 이동
@@ -19,11 +31,26 @@ public class GameManager
     public Vector2 MoveDir
     {
         get { return _moveDir; }
-        set 
-        {   
+        set
+        {
             _moveDir = value;
             OnMoveDirChanged?.Invoke(_moveDir);
         }
     }
     #endregion
+
+    #region 전투
+    int _killCount;
+    public event Action<int> OnkillCountChanged;
+
+    public int KillCount
+    {
+        get { return _killCount; }
+        set 
+        {
+            _killCount = value; OnkillCountChanged?.Invoke(value); 
+        }
+    }
+    #endregion
+
 }

@@ -1,7 +1,6 @@
 using Mono.Cecil;
 using UnityEditor.AddressableAssets.HostingServices;
 using UnityEngine;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class GameScene : MonoBehaviour
 {
@@ -54,6 +53,9 @@ public class GameScene : MonoBehaviour
     void StartLoaded()
     {
         Managers.Data.Init();
+
+        Managers.UI.ShowSceneUI<UI_GameScene>();
+
         _spawningPool = gameObject.AddComponent<SpawningPool>();
 
         foreach (var skilldata in Managers.Data.SkillDic.Values)
@@ -77,11 +79,44 @@ public class GameScene : MonoBehaviour
 
         Camera.main.GetComponent<CameraController>().Target = player.gameObject;
 
-        
+        Managers.Game.OnkillCountChanged -= HandleOnkillCountChanged;
+        Managers.Game.OnkillCountChanged += HandleOnkillCountChanged;
+        Managers.Game.OnGemCountChanged -= HandleOnGemCountChanged;
+        Managers.Game.OnGemCountChanged += HandleOnGemCountChanged;
     }
 
-    void Update()
+    int _collectedGemCount = 0;
+    int _remainingTotalGemCount = 10;
+    public void HandleOnGemCountChanged(int gemCount) 
     {
-        
+        _collectedGemCount++;
+
+        if (_collectedGemCount == _remainingTotalGemCount)
+        {
+            Managers.UI.ShowPopup<UI_SkillSelectPopup>();
+            _collectedGemCount = 0;
+            _remainingTotalGemCount *= 2; 
+        }
+
+        Managers.UI.GetSceneUI<UI_GameScene>().SetGemCountRatio((float)_collectedGemCount / _remainingTotalGemCount);
+    }
+
+    public void HandleOnkillCountChanged(int killCount)
+    {
+        Managers.UI.GetSceneUI<UI_GameScene>().SetKillCount(killCount);
+
+        if (killCount==5)
+        {
+            //º¸½º? ÄÁÅÙÃ÷
+        }
+    }
+    private void OnDestroy()
+    {
+        if (Managers.Game != null)
+        {
+            Managers.Game.OnGemCountChanged -= HandleOnGemCountChanged;
+            Managers.Game.OnGemCountChanged -= HandleOnGemCountChanged;
+        }
+            
     }
 }
