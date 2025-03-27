@@ -42,6 +42,8 @@ public struct PrefabsName
     public const string UI_Joystick = "UI_Joystick.prefab";
     public const string Map = "Map.prefab";
     public const string Gem = "EXPGem.prefab";
+    public const string UI_SkillSelectPopup = "UI_SkillSelectPopup.prefab";
+    public const string UI_SkillCardItem = "UI_SkillCardItem.prefab";
 }
 
 public struct SkillPrefabsName
