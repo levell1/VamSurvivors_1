@@ -99,7 +99,7 @@ public class PlayerController : CreatureController
     public override void OnDamaged(BaseController attacker, int damage)
     {
         base.OnDamaged(attacker, damage);
-        //Debug.Log($"Ondamage ! {attacker} {Hp}");
+        Debug.Log($"Ondamage ! {attacker} {Hp}");
 
         // Temp ¹Ý°Ý
         CreatureController cc = attacker as CreatureController;

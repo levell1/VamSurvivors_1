@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor.AddressableAssets.HostingServices;
 using UnityEngine;
@@ -30,14 +31,29 @@ public class ObjectManager
         }
         else if(type == typeof(MonsterController))
         {
-            string name = (templateID == 0 ? PrefabsName.Goblin : PrefabsName.Snake);
+            string name = "";
+            switch (templateID) 
+            {
+                case MonsterID.GOBLIN_ID:
+                    name = PrefabsName.Goblin;
+                    break;
+                case MonsterID.SNAKE_ID:
+                    name = PrefabsName.Snake;
+                    break;
+                case MonsterID.BOSS_ID:
+                    name = PrefabsName.Boss;
+                    
+                    break;
+            }
             GameObject go = Managers.Resource.Instantiate(name, pooling : true);
             go.transform.position = position;
 
             MonsterController mc = go.GetOrAddComponent<MonsterController>();
             Monster.Add(mc);
             mc.Init();
+
             return mc as T;
+
         }
         else if (type == typeof(GemController))
         {
@@ -92,8 +108,8 @@ public class ObjectManager
     {
         if (obj.IsValid()==false)
         {
-            // µð¹ö±ëÄÚµå
-            Debug.Log($"Object Pool Error Debuging");
+            Debug.Log($"Object Pool Error Debuging{obj}");
+            return;
         }
         System.Type type = typeof(T);
 
@@ -104,6 +120,11 @@ public class ObjectManager
         else if (type == typeof(MonsterController))
         {
             Monster.Remove(obj as MonsterController);
+            Managers.Resource.Destroy(obj.gameObject);
+        }
+        else if (type == typeof(BossController))
+        {
+            Monster.Remove(obj as BossController);
             Managers.Resource.Destroy(obj.gameObject);
         }
         else if (type == typeof(GemController))
@@ -120,5 +141,15 @@ public class ObjectManager
             Managers.Resource.Destroy(obj.gameObject);
         }
 
+    }
+
+    public void DespawnAllMonsters() 
+    {
+        var mosters = Monster.ToList();
+
+        foreach (var monster in mosters)
+        {
+            Despawn<MonsterController>(monster);
+        }
     }
 }

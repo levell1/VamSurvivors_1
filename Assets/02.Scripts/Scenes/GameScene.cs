@@ -1,4 +1,5 @@
 using Mono.Cecil;
+using UnityEditor;
 using UnityEditor.AddressableAssets.HostingServices;
 using UnityEngine;
 
@@ -50,6 +51,30 @@ public class GameScene : MonoBehaviour
     }*/
 
     SpawningPool _spawningPool;
+
+    StageType _stageType;
+    public StageType StageType 
+    {
+        get { return _stageType; }
+        set 
+        {
+            _stageType = value;
+            if (_spawningPool !=null)
+            {
+                switch (value) 
+                {
+                    case StageType.Normal:
+                        _spawningPool.Stopped = false;
+                        break;
+                    case StageType.Boss:
+                        _spawningPool.Stopped = true;
+                        break;
+
+                }
+            }
+        }
+    }
+
     void StartLoaded()
     {
         Managers.Data.Init();
@@ -68,7 +93,7 @@ public class GameScene : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             Vector3 randPos = new Vector2(Random.Range(-5, 5), Random.Range(-5, 5));
-            MonsterController mc = Managers.Object.Spawn<MonsterController>(randPos,Random.Range(0,2));
+            //MonsterController mc = Managers.Object.Spawn<MonsterController>(randPos, 1 + Random.Range(0, 2));
         }
 
         var joystick = Managers.Resource.Instantiate(PrefabsName.UI_Joystick);
@@ -104,10 +129,12 @@ public class GameScene : MonoBehaviour
     public void HandleOnkillCountChanged(int killCount)
     {
         Managers.UI.GetSceneUI<UI_GameScene>().SetKillCount(killCount);
-
         if (killCount==5)
         {
-            //º¸½º? ÄÁÅÙÃ÷
+            StageType = StageType.Boss;
+            Managers.Object.DespawnAllMonsters();
+            Vector2 spawnPos = Utils.GenerateMonsterSpawnPosition(Managers.Game.Player.transform.position, 5, 10);
+            Managers.Object.Spawn<MonsterController>(spawnPos, MonsterID.BOSS_ID);
         }
     }
     private void OnDestroy()
