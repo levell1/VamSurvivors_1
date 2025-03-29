@@ -26,7 +26,7 @@ public class ObjectManager
 
             PlayerController pc = go.GetOrAddComponent<PlayerController>();
             Player = pc;
-            pc.Init();
+            //pc.Init();
             return pc as T;
         }
         else if(type == typeof(MonsterController))
@@ -85,17 +85,17 @@ public class ObjectManager
 
             return pc as T;
         }
-        else if (typeof(T).IsSubclassOf(typeof(SkillController)))
+        else if (typeof(T).IsSubclassOf(typeof(SkillBase)))
         {
             if (Managers.Data.SkillDic.TryGetValue(templateID,out Data.SkillData skillData)==false)
             {
                 Debug.LogError($"ObjectManager Spawn Skill Failed{templateID}");
                 return null;
             }
-            GameObject go = Managers.Resource.Instantiate(SkillPrefabsName.EgoSword, pooling: true);
+            GameObject go = Managers.Resource.Instantiate(skillData.prefab, pooling: true);
             go.transform.position = position;
 
-            T t = go.GetComponent<T>();
+            T t = go.GetOrAddComponent<T>();
             
             t.Init();
 

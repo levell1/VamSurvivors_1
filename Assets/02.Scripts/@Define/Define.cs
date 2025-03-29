@@ -23,13 +23,13 @@ public enum ObjectType
 public enum SkillType
 {
     None,
-    Melee,
-    Projectile,
-    Etc,
+    Sequence,
+    Repeat,
 }
 public struct SkillID
 {
     public const int EGO_SWORD_ID = 10;
+    public const int FIRE_BALL_ID = 1;
 }
 
 public struct MonsterID

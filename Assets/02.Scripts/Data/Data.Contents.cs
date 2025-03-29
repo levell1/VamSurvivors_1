@@ -99,9 +99,11 @@ namespace Data
     {
         [XmlAttribute]
         public int templateID;
-        [XmlAttribute(AttributeName = "type")]
+
+        //[XmlAttribute(AttributeName = "type")]
         //public string skillTypeStr;
-        public SkillType skillType = SkillType.None;
+        //public SkillType skillType = SkillType.None;
+
         [XmlAttribute]
         public int nextID;
         public int prevID =0;//Todo
