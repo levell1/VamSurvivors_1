@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 // EgoSword : ÆòÅ¸
@@ -12,7 +13,7 @@ public class SkillBase : BaseController
 
     public int SkillLevel { get; set; } = 0; 
     public bool IsLearnedSkill { get { return SkillLevel > 0; } }
-    public int Damage { get; set; }
+    public int Damage { get; set; } = 100;
 
     public SkillBase(SkillType skillType) 
     {
@@ -38,17 +39,17 @@ public class SkillBase : BaseController
 
     public void StopDestroy() 
     {
-        if (_coDestroy!=null)
+        if (_coDestroy != null)
         {
             StopCoroutine(_coDestroy);
             _coDestroy = null;
         }
     }
 
-    IEnumerator CoDestroy(float delaySecond) 
+    IEnumerator CoDestroy(float delaySeconds)
     {
-        yield return new WaitForSeconds(delaySecond);
-        
+        yield return new WaitForSeconds(delaySeconds);
+
         if (this.IsValid())
         {
             Managers.Object.Despawn(this);

@@ -26,7 +26,7 @@ public class ObjectManager
 
             PlayerController pc = go.GetOrAddComponent<PlayerController>();
             Player = pc;
-            //pc.Init();
+            pc.Init();
             return pc as T;
         }
         else if(type == typeof(MonsterController))
@@ -74,7 +74,7 @@ public class ObjectManager
 
             return gc as T;
         }
-        else if (type == typeof(ProjectileController))
+        /*else if (type == typeof(ProjectileController))
         {
             GameObject go = Managers.Resource.Instantiate(SkillPrefabsName.FireProjectile, pooling: true);
             go.transform.position = position;
@@ -84,7 +84,7 @@ public class ObjectManager
             pc.Init();
 
             return pc as T;
-        }
+        }*/
         else if (typeof(T).IsSubclassOf(typeof(SkillBase)))
         {
             if (Managers.Data.SkillDic.TryGetValue(templateID,out Data.SkillData skillData)==false)
@@ -97,7 +97,7 @@ public class ObjectManager
 
             T t = go.GetOrAddComponent<T>();
             
-            t.Init();
+            //t.Init();
 
             return t;
         }

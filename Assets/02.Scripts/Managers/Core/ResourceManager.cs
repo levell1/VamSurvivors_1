@@ -46,6 +46,7 @@ public class ResourceManager
         if (Managers.Pool.Push(go))
             return;
 
+        
         Object.Destroy(go);
     }
 
