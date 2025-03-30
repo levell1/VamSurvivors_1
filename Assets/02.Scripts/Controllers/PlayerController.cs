@@ -30,7 +30,6 @@ public class PlayerController : CreatureController
         if (base.Init() == false)
             return false;
 
-
         _speed = 5.0f;
 
         Managers.Game.OnMoveDirChanged += HandleOnMoveDirChanged;

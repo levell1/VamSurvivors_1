@@ -26,7 +26,7 @@ public class ObjectManager
 
             PlayerController pc = go.GetOrAddComponent<PlayerController>();
             Player = pc;
-            pc.Init();
+            //pc.Init();
             return pc as T;
         }
         else if(type == typeof(MonsterController))
