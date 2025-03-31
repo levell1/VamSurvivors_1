@@ -9,8 +9,16 @@ public class BossController : MonsterController
         base.Init();
 
         _animator = GetComponent<Animator>();
-        CreatureState = CreatureState.Moving;
-        Hp = 100000;
+        //CreatureState = CreatureState.Moving;
+        Hp = 1000000;
+
+        CreatureState = CreatureState.Skill;
+
+        Skills.AddSkill<Move>(transform.position);
+        Skills.AddSkill<Dash>(transform.position);
+        Skills.AddSkill<Dash>(transform.position);
+        Skills.AddSkill<Dash>(transform.position);
+        Skills.StartNextSequenceSkill();
 
         return true;
     }
@@ -26,7 +34,7 @@ public class BossController : MonsterController
                 _animator.Play("Moving");
                 break;
             case CreatureState.Skill:
-                _animator.Play("Attack");
+                //_animator.Play("Attack");
                 break;
             case CreatureState.Dead:
                 _animator.Play("Death");
@@ -34,7 +42,8 @@ public class BossController : MonsterController
         }
     }
 
-    float _range = 2.0f;
+    // 스킬로 수정
+    /*float _range = 2.0f;
     protected override void UpdateMoving()
     {
         PlayerController pc = Managers.Game.Player;
@@ -58,7 +67,7 @@ public class BossController : MonsterController
         if (_coWait ==null)
             CreatureState = CreatureState.Moving;
 
-    }
+    }*/
 
     protected override void UpdateDead()
     {

@@ -7,7 +7,7 @@ public class SkillBook : MonoBehaviour
 
     public List<SkillBase> Skills { get; } = new List<SkillBase>();
 
-    public List<SkillBase> RepatedSkills { get; } = new List<SkillBase>();
+    public List<SkillBase> RepeatedSkills { get; } = new List<SkillBase>();
     public List<SequenceSkill> SequenceSkills { get; } = new List<SequenceSkill>();
 
     public T AddSkill<T>(Vector3 position, Transform parent = null) where T : SkillBase 
@@ -21,7 +21,7 @@ public class SkillBook : MonoBehaviour
             egoSword.ActivateSkill();
 
             Skills.Add(egoSword);
-            RepatedSkills.Add(egoSword);
+            RepeatedSkills.Add(egoSword);
             return egoSword as T;
         }
         else if (type == typeof(FireballSkill))
@@ -31,15 +31,51 @@ public class SkillBook : MonoBehaviour
             fireBall.ActivateSkill();
 
             Skills.Add(fireBall);
-            RepatedSkills.Add(fireBall);
+            RepeatedSkills.Add(fireBall);
             return fireBall as T;
         }
-        else
+        else if (type.IsSubclassOf(typeof(SequenceSkill)))
         {
-            
+            var skill = gameObject.GetOrAddComponent<T>();
+            Skills.Add(skill);
+            SequenceSkills.Add(skill as SequenceSkill);
+
+            return skill as T;
         }
 
         return null;
     }
+
+    int _sequenceIndex = 0;
+    public void StartNextSequenceSkill() 
+    {
+        if (_stopped)
+            return;
+        if (SequenceSkills.Count == 0)
+            return;
+
+        SequenceSkills[_sequenceIndex].DoSkill(OnFinishedSequenceSkill);
+    }
+
+    void OnFinishedSequenceSkill() 
+    {
+        _sequenceIndex = (_sequenceIndex + 1) % SequenceSkills.Count;
+        StartNextSequenceSkill();
+    }
+
+
+    bool _stopped = false;
+
+    public void StopSkills() 
+    {
+        _stopped = true;
+
+        foreach (var skill in RepeatedSkills)
+        {
+            skill.StopAllCoroutines();
+        }
+    }
+
+
 
 }
