@@ -23,7 +23,7 @@ public class Utils
         return transform.gameObject;
     }
 
-    private static T FindChild<T>(GameObject go, string name, bool recursive) where T : UnityEngine.Object
+    public static T FindChild<T>(GameObject go, string name, bool recursive) where T : UnityEngine.Object
     {
         if (go == null)
             return null;

@@ -74,7 +74,7 @@ public class ObjectManager
 
             return gc as T;
         }
-        /*else if (type == typeof(ProjectileController))
+        else if (type == typeof(ProjectileController))
         {
             GameObject go = Managers.Resource.Instantiate(SkillPrefabsName.FireProjectile, pooling: true);
             go.transform.position = position;
@@ -84,8 +84,28 @@ public class ObjectManager
             pc.Init();
 
             return pc as T;
-        }*/
-        else if (typeof(T).IsSubclassOf(typeof(SkillBase)))
+        }
+        else if (type == typeof(EgoSword))
+        {
+            GameObject go = Managers.Resource.Instantiate(SkillPrefabsName.EgoSword);
+            go.transform.position = position;
+
+            EgoSword es = go.GetOrAddComponent<EgoSword>();
+            es.Init();
+
+            return es as T;
+        }
+        else if (type == typeof(FireballSkill))
+        {
+            GameObject go = Managers.Resource.Instantiate(SkillPrefabsName.FireBallSpawn);
+            go.transform.position = position;
+
+            FireballSkill fs = go.GetOrAddComponent<FireballSkill>();
+            fs.Init();
+
+            return fs as T;
+        }
+        /*else if (typeof(T).IsSubclassOf(typeof(SkillBase)))
         {
             if (Managers.Data.SkillDic.TryGetValue(templateID,out Data.SkillData skillData)==false)
             {
@@ -100,7 +120,7 @@ public class ObjectManager
             //t.Init();
 
             return t;
-        }
+        }*/
         return null;
     }
 

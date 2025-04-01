@@ -26,7 +26,7 @@ public class SkillBook : MonoBehaviour
         }
         else if (type == typeof(FireballSkill))
         {
-            var fireBall = Managers.Object.Spawn<FireballSkill>(position,SkillID.EGO_SWORD_ID);
+            var fireBall = Managers.Object.Spawn<FireballSkill>(position,SkillID.FIRE_BALL_ID);
             fireBall.transform.SetParent(parent);
             fireBall.ActivateSkill();
 

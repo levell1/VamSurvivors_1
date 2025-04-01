@@ -12,6 +12,18 @@ public enum Sound
     Effect,
 }
 
+public enum UIEvent
+{
+    Click,
+    Pressed,
+    PointerDown,
+    PointerUp,
+    Drag,
+    BeginDrag,
+    EndDrag,
+}
+
+
 public enum ObjectType
 {
     Player,
@@ -30,6 +42,7 @@ public struct SkillID
 {
     public const int EGO_SWORD_ID = 10;
     public const int FIRE_BALL_ID = 1;
+
 }
 
 public struct MonsterID
@@ -73,6 +86,7 @@ public struct SkillPrefabsName
 {
     public const string FireProjectile = "FireProjectile.prefab";
     public const string EgoSword = "EgoSword.prefab";
+    public const string FireBallSpawn = "FireBallSpawn.prefab";
 }
 
 
