@@ -8,10 +8,8 @@ public class GameScene : MonoBehaviour
 
     void Start()
     {
-        //Managers.Resource.LoadAllAsync<GameObject>("Prefabs", OnLoadProgress);
         Managers.Resource.LoadAllAsync<Object>("PreLoad", (key,count,totalCount) =>
         {
-            //Debug.Log($"{key} {count}/{totalCount}");
             Debug.Log($"{key} {count}/{totalCount}");
             if (count == totalCount)
             {

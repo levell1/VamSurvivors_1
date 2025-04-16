@@ -64,8 +64,6 @@ public class ResourceManager
         if (key.Contains(".sprite"))
             loadKey = $"{key}[{key.Replace(".sprite", "")}]";
             
-        
-
         // 리소스 비동기 로딩 
         var asyncOperation = Addressables.LoadAssetAsync<T>(loadKey);
         asyncOperation.Completed += (op) =>
@@ -77,7 +75,6 @@ public class ResourceManager
 
     public void LoadAllAsync<T>(string label, Action<string, int, int> callback) where T : UnityEngine.Object
     {
-        // Action<string, int, int> => <Key, loadCount, totalCount>   loadCount, totalCount는 유동적 필요x면 없어도된다.
         var opHandle = Addressables.LoadResourceLocationsAsync(label, typeof(T));
         opHandle.Completed += (op) =>
         {
